@@ -1,0 +1,45 @@
+table.search {
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+}
+
+table.search,
+td,
+th.search {
+  border-collapse: separate;
+  border-spacing: 1px;
+  line-height: 1.5;
+  border-top: 1px solid #6a60a9;
+  padding: 15px;
+}
+
+th.search {
+  width: 150px;
+  padding: 10px;
+  font-weight: bold;
+  vertical-align: top;
+  border-bottom: 1px solid #6a60a9;
+  background: #dedcee;
+}
+
+.search td {
+  width: 350px;
+  padding-right: 40px;
+  vertical-align: top;
+  border-bottom: 1px solid #6a60a9;
+  letter-spacing: 5px;
+}
+
+tr.search:nth-child(6) {
+  background: white;
+}
+
+select.sports {
+  letter-spacing: 5px;
+  text-align-last: center;
+}
+
+table.list {
+  margin: 50px auto;
+}

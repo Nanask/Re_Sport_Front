@@ -1,0 +1,44 @@
+button {
+  width: 10%;
+  height: 40px;
+  font-weight: bold;
+  margin-left: 12px;
+  margin-right: 12px;
+}
+
+button:hover {
+  background-color: #dedcee;
+  cursor: pointer;
+}
+
+table {
+  width: 80%;
+  margin: 0px auto;
+  border-top: 1px solid #6a60a9;
+  border-collapse: collapse;
+}
+
+th {
+  padding: 15px 10px;
+  border-top: 1px solid #6a60a9;
+  text-align: center;
+}
+
+tr.first {
+  background-color: #dedcee;
+}
+
+tr:not(.first) {
+  background-color: whitesmoke;
+}
+
+th:nth-child(1) {
+  border-right: 1px dashed lavender;
+}
+
+h1 {
+  padding: 30px;
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+}

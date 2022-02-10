@@ -1,0 +1,215 @@
+section.contents > h2 {
+  height: 220px;
+  color: #ffffff;
+  font-size: 60px;
+  text-align: center;
+  transform: translate(0, 180px);
+  text-shadow: 1px 1px 1px rgb(99, 99, 99);
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+p {
+  color: #ffffff;
+  text-align: right;
+  position: relative;
+  transform: translate(-5%, -40%);
+  font-size: 20px;
+  text-shadow: 1px 1px 1px 0.5;
+  top: 60%;
+}
+p.text1 {
+  text-align: center;
+  font-size: 25px;
+  transform: translateY(-150px);
+}
+
+section.contents {
+  height: 100vh;
+  width: 100%;
+  position: absolute;
+  overflow: hidden;
+  top: 0;
+}
+section.contents > div.sq_box {
+  background-color: rgba(152, 118, 207, 0.3);
+  height: 3000px;
+  width: 2000px;
+
+  transform: translate(-50%, -50%);
+  transform: rotate(70deg);
+  position: absolute;
+  top: -10%;
+  left: 10%;
+  overflow: hidden;
+}
+
+section.contents {
+  background-size: cover;
+  height: 100vh;
+  position: absolute;
+  background-color: #dedcee;
+}
+
+/* section.contents div#img1::before {
+	  content: "";
+	  opacity: 0.5;
+	  position: absolute;
+	  top: 0px;
+	  left: 0px;
+	  right: 0px;
+	  bottom: 0px;
+	  background-color: #000;
+	  height: 100vh;
+	} */
+
+div.main_box {
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  left: 50%;
+  top: 20%;
+  transform: translateX(-50%);
+}
+
+div.main_box div {
+  width: 250px;
+  height: 250px;
+
+  margin: 150px 20px;
+}
+
+div > div#box1 h1 {
+  position: relative;
+  text-align: center;
+  color: white;
+  font-size: 60px;
+  visibility: hidden;
+  margin: 50px auto;
+  /* visibility: hidden; 영역을 차지하면서 숨김 */
+}
+
+div > div#box1:hover {
+  box-shadow: 250px 0 0 0 rgba(0, 0, 0, 0.6) inset;
+
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+div > div#box1:hover h1 {
+  visibility: visible;
+  transition: 0.5s;
+  /* text-align: center; */
+  /* 보이게 하기 */
+}
+
+div#box2 h1 {
+  position: relative;
+  text-align: center;
+  color: white;
+  font-size: 60px;
+  visibility: hidden;
+  margin: 50px auto;
+  /* visibility: hidden; 영역을 차지하면서 숨김 */
+}
+
+div#box2:hover {
+  box-shadow: 250px 0 0 0 rgba(0, 0, 0, 0.6) inset;
+
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+div#box2:hover h1 {
+  visibility: visible;
+  transition: 0.5s;
+  /* text-align: center; */
+  /* 보이게 하기 */
+}
+
+div#box3 h1 {
+  position: relative;
+  text-align: center;
+  color: white;
+  font-size: 60px;
+  visibility: hidden;
+  margin: 50px auto;
+  word-spacing: 5px;
+  /* visibility: hidden; 영역을 차지하면서 숨김 */
+}
+
+div#box3:hover {
+  box-shadow: 250px 0 0 0 rgba(0, 0, 0, 0.6) inset;
+
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+div#box3:hover h1 {
+  visibility: visible;
+  transition: 0.5s;
+  /* text-align: center; */
+  /* 보이게 하기 */
+}
+
+div#box1 {
+  background-color: rgba(0, 0, 0, 0.3);
+  background-size: 100% 100%;
+  position: relative;
+}
+
+div#box2 {
+  background-color: rgba(0, 0, 0, 0.3);
+  background-size: 100% 100%;
+  position: relative;
+}
+
+div#box3 {
+  background-color: rgba(0, 0, 0, 0.3);
+  background-size: 100% 100%;
+  position: relative;
+}
+
+div#box1 i {
+  color: white;
+  position: relative;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -55%);
+}
+
+div#box2 i {
+  color: white;
+  position: relative;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -60%);
+}
+
+div#box3 i {
+  color: white;
+  position: relative;
+  left: 50%;
+  top: 50%;
+  transform: translate(-40%, -55%);
+}
+
+section.contents > h3 {
+  color: white;
+  height: 20px;
+
+  display: inline-block;
+  position: absolute;
+  bottom: 0;
+}
+
+footer {
+  color: white;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: inline-block;
+  height: 25px;
+  width: 100%;
+  text-align: right;
+  position: absolute;
+  padding-right: 30px;
+  bottom: 0;
+}

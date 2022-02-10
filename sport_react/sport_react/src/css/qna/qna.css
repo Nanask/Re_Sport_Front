@@ -1,0 +1,11 @@
+body {
+  background-color: white;
+  font-family: "Noto Sans KR", sans-serif;
+  font-family: "Roboto Condensed", sans-serif;
+}
+
+tr:hover:not(.first) {
+  background-color: #dedcee;
+  cursor: pointer;
+  color: darkblue;
+}
