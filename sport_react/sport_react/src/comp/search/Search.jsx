@@ -11,7 +11,7 @@ const Search = () => {
         <tr className="search">
           <th className="search">이용료</th>
           <td>
-            <input id="ra" type="radio" name="ra" value="무료" checked /> 무료
+            <input id="ra" type="radio" name="ra" value="무료" /> 무료
             <input id="ra" type="radio" name="ra" value="유료" /> 유료
             <input id="ra" type="radio" name="ra" value="유/무료" /> 유/무료
           </td>

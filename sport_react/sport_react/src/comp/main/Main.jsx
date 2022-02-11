@@ -21,12 +21,8 @@ const Main = () => {
         <div class="sq_box"></div>
         <div class="main_box">
           {/* <Route path="/search" element={<Search />}> */}
-
           <div id="box1">
             <Link to="/search">
-              {/* <Link to="/search" />
-            <Search /> */}
-              {/* <Link to="/search"></Link> */}
               <i class="fas fa-search fa-7x"></i>
               <h1>search</h1>
             </Link>
