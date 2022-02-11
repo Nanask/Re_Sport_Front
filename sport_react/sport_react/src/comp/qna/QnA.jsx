@@ -1,13 +1,12 @@
 import React from "react";
 // 함수
-import useQnAContext from "./../../context/QnAContext";
+import { useQnAContext } from "./../../context/QnAContext";
 // 컨텍스트
-import QnAContext from "./../../context/QnAContext";
 
 // 내부에 있는 함수를 가져올때만 {}를 사용해서 import
 
 const QnA = () => {
-  const { onBoardClick, boardList } = useQnAContext();
+  const { boardList, onBoardClick } = useQnAContext();
 
   // q_seq: "1",
   //   q_title: "동호회...",
@@ -19,6 +18,7 @@ const QnA = () => {
   const trList = boardList.map((sample) => {
     return (
       <tr data-id={sample.q_seq}>
+        <td>{sample.q_seq}</td>
         <td>{sample.q_title}</td>
         <td>{sample.q_center}</td>
         <td>{sample.q_userId}</td>
@@ -29,21 +29,19 @@ const QnA = () => {
 
   return (
     <div>
-      <QnAContext>
-        <h1>1 대 1 문의 게시판</h1>
-        <table onClick={onBoardClick}>
-          <tdead>
-            <tr className="first">
-              <th>번호</th>
-              <th>제목</th>
-              <th>시설이름</th>
-              <th>아이디</th>
-              <th>문의내용</th>
-            </tr>
-          </tdead>
-          <tbody>{trList}</tbody>
-        </table>
-      </QnAContext>
+      <h1>1 대 1 문의 게시판</h1>
+      <table>
+        <thead>
+          <tr className="first">
+            <th>번호</th>
+            <th>제목</th>
+            <th>시설이름</th>
+            <th>아이디</th>
+            <th>문의내용</th>
+          </tr>
+        </thead>
+        <tbody onClick={onBoardClick}>{trList}</tbody>
+      </table>
     </div>
   );
 };
