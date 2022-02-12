@@ -35,7 +35,7 @@ const Main = () => {
             </Link>
           </div>
           <div id="box3">
-            <Link to="/qna">
+            <Link to="/qna/list">
               <i class="fas fa-edit fa-7x"></i>
               <h1>Q&A</h1>
             </Link>

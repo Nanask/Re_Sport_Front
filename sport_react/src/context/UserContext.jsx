@@ -13,8 +13,8 @@ const [user, setUser] = {
 
 const props = {};
 
-const UserContextProvider = ({ children }) => {
+const UserContext = ({ children }) => {
   return <UserContext.Provider value={props}>{children}</UserContext.Provider>;
 };
 
-export default UserContextProvider;
+export default UserContext;
