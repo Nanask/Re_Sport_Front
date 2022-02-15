@@ -8,10 +8,26 @@ export const useQnAContext = () => {
   return useContext(AppContext);
 };
 
-let navigate = useNavigate;
-
 const QnAContext = ({ children }) => {
-  const [qna, QnA] = useState({
+  const navigate = useNavigate;
+  const date = new Date();
+
+  let time = {
+    year: date.getFullYear(), //현재 년도
+    month: date.getMonth() + 1, // 현재 월
+    date: date.getDate(), // 현제 날짜
+    hours: date.getHours(), //현재 시간
+    minutes: date.getMinutes(), //현재 분
+  };
+
+  time = `${time.year}/${time.month}/${time.date} ${time.hours}:${time.minutes}`;
+
+  const onChange = (e) => {
+    const { value, name } = e.target;
+    // console.log("name", value);
+    setQnA({ ...qna, [name]: value });
+  };
+  const [qna, setQnA] = useState({
     qna_seq: "",
     qna_id: "",
     qna_title: "",
@@ -21,6 +37,8 @@ const QnAContext = ({ children }) => {
     qna_date: "",
     qna_count: "",
   });
+
+  // console.log("time", time);
 
   const onQListClick = (e) => {
     const seq = e.target.closest("TR").dataset.id;
@@ -40,21 +58,42 @@ const QnAContext = ({ children }) => {
     // },
   ]);
 
-  const GetqnaList = async () => {
+  const updateButton = (qna_seq) => {};
+
+  const deleteButton = () => {};
+
+  const getqnaList = async () => {
     const res = await fetch("http://localhost:8080/qna/list");
     const result = await res.json();
     setQnAList(result);
-    console.log("result", result);
-    console.log("qnaList", qnaList);
+    // console.log("result", result);
+    // console.log("qnaList", qnaList);
     // return result;
   };
 
-  const WriteButton = (e) => {
-    alert("detail");
-    navigate("/qna/detail");
+  const writeButton = async () => {
+    // const { qna_seq, qna_id, qna_title, qna_name, qna_text, qna_email, qna_date } = qna;
+    alert("등록");
+    // alert(qna_seq, qna_id, qna_title, qna_name, qna_text, qna_email, qna_date);
+    const res = await fetch("http://localhost:8080/qna/write", {
+      method: "POST",
+      body: JSON.stringify(qna),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const result = await res.text();
+
+    if (res) {
+      console.log("result", result);
+      setQnA({ qna_seq: "", qna_id: "", qna_title: "", qna_name: "", qna_text: "", qna_email: "", qna_date: "", qna_count: "" });
+      // navigate("/qna/list");
+      window.location.href = "/qna/list";
+    }
   };
 
-  const props = { onQListClick, qnaList, WriteButton, GetqnaList };
+  const props = { onQListClick, qnaList, getqnaList, qna, writeButton, onChange };
   return <AppContext.Provider value={props}>{children}</AppContext.Provider>;
 };
 

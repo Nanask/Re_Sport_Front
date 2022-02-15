@@ -1,28 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 // import "../../css/search/search.css";
 import { useSearchContext } from "./../../context/SearchContext";
 
 const Search = () => {
-  // const {} = useSearchContext();
+  const { detailList, GetDList } = useSearchContext();
 
-  const [detailList, setDetailList] = useState([
-    {
-      al_seq: "1",
-      al_code: "염주 종합체육관",
-      al_tel: "062) 604 - 1400",
-      al_sport: "핸드볼, 농구, 배드민턴, 탁구, 배구",
-      al_addr: "광주광역시 서구 금화로 278",
-      al_free: "",
-    },
-    {
-      al_seq: "2",
-      al_code: "수완 인라인롤러경기장",
-      al_tel: "062) 604 - 1400",
-      al_sport: "인라인스케이트",
-      al_addr: "광주광역시 광산구 장덕로96번길 15",
-      al_free: "",
-    },
-  ]);
+  // useEffect(GetDList, []);
 
   const dtList = detailList.map((list, index) => {
     return (
@@ -114,7 +97,7 @@ const Search = () => {
       </div>
       <table>
         {/* 배열 데이터 만들어서 map 돌려서 출력하기 !! 제발제발제발제발제발제발 */}
-        <tr className="border-2 text-center w-">
+        <tr className="border-2 text-center">
           <th className="p-4">번호</th>
           <th>시설 이름</th>
           <th>전화번호</th>

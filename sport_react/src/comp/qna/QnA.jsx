@@ -9,18 +9,18 @@ import { useQnAContext } from "./../../context/QnAContext";
 
 // 목표! useEffect를 사용하지 않고 화면 랜더링해보기
 const QnA = () => {
-  const { qnaList, onQListClick, WriteButton, GetqnaList } = useQnAContext();
+  const { qnaList, onQListClick, getqnaList } = useQnAContext();
 
-  useEffect(GetqnaList, []);
+  useEffect(getqnaList, []);
 
   const trList = qnaList.map((sample, index) => {
     return (
-      <tr data-id={sample.qna_seq} key={sample.qna_seq}>
+      <tr className="border-2" data-id={sample.qna_seq} key={sample.qna_seq}>
         <td>{index + 1}</td>
         <td>{sample.qna_id}</td>
-        <td>{sample.qna_title}</td>
+        <td className="overflow-hidden text-ellipsis whitespace-nowrap">{sample.qna_title}</td>
         <td>{sample.qna_name}</td>
-        <td>{sample.qna_text}</td>
+        <td className="w-30 overflow-hidden text-ellipsis whitespace-nowrap">{sample.qna_text}</td>
         <td>{sample.qna_email}</td>
         <td>{sample.qna_date}</td>
         <td>{sample.qna_count}</td>
@@ -29,11 +29,11 @@ const QnA = () => {
   });
 
   return (
-    <div>
-      <h1>1 대 1 문의 게시판</h1>
-      <table>
+    <div className="flex flex-col justify-center items-center space-y-5 font-kr">
+      <h1 className="mt-10 font-bold text-3xl">1 대 1 문의 게시판</h1>
+      <table className="table-fixed text-center border-2 w-600">
         <thead>
-          <tr className="first">
+          <tr className="bg-slate-100 border-2 ">
             <th>번호</th>
             <th>ID</th>
             <th>제목</th>
@@ -46,9 +46,9 @@ const QnA = () => {
         </thead>
         <tbody onClick={onQListClick}>{trList}</tbody>
       </table>
-      <div className="btn_qna">
-        <Link to="/qna/detail">
-          <button className="btn_write">작성하기</button>
+      <div className="">
+        <Link to="/qna/write">
+          <button className="mt-10 ml-auto inline-block mr-30 pt-2 pr-3 pl-3 pb-2 hover:bg-slate-200 m-3">작성하기</button>
         </Link>
       </div>
     </div>

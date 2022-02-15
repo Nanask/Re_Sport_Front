@@ -26,33 +26,38 @@ const SearchContext = ({ children }) => {
     al_free: "",
   });
 
-  // const [detailList, setDetailList] = useState([
-  //   {
-  //     al_seq: "1",
-  //     al_code: "염주 종합체육관",
-  //     al_name: "",
-  //     al_tel: "062) 604 - 1400",
-  //     al_sport: "핸드볼, 농구, 배드민턴, 탁구, 배구",
-  //     al_addr: "광주광역시 서구 금화로 278",
-  //     al_free: "",
-  //   },
-  //   {
-  //     al_seq: "2",
-  //     al_code: "수완 인라인롤러경기장",
-  //     al_name: "",
-  //     al_tel: "062) 604 - 1400",
-  //     al_sport: "인라인스케이트",
-  //     al_addr: "광주광역시 광산구 장덕로96번길 15",
-  //     al_free: "",
-  //   },
-  // ]);
+  const [detailList, setDetailList] = useState([
+    {
+      al_seq: "1",
+      al_code: "염주 종합체육관",
+      al_tel: "062) 604 - 1400",
+      al_sport: "핸드볼, 농구, 배드민턴, 탁구, 배구",
+      al_addr: "광주광역시 서구 금화로 278",
+      al_free: "",
+    },
+    {
+      al_seq: "2",
+      al_code: "수완 인라인롤러경기장",
+      al_tel: "062) 604 - 1400",
+      al_sport: "인라인스케이트",
+      al_addr: "광주광역시 광산구 장덕로96번길 15",
+      al_free: "",
+    },
+  ]);
 
   const GetDList = async () => {
-    const res = await fetch("http://localhost:8080/search");
+    const res = await fetch("http://localhost:8080/search/");
+    const result = await res.json();
+    // console.log("result", result);
+    return result;
   };
 
-  const props = {};
-  return <SearchContext.Provider value={props}>{children}</SearchContext.Provider>;
+  // const dtList = GetDList.forEach((item) => {
+  //   console.log(item);
+  // });
+
+  const props = { detailList, GetDList };
+  return <AppContext.Provider value={props}>{children}</AppContext.Provider>;
 };
 
 export default SearchContext;
