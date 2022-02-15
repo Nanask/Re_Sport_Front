@@ -1,6 +1,6 @@
-import React from "react";
-import { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useErrorContext } from "./ErrorContext";
 
 const AppContext = createContext();
 
@@ -9,6 +9,7 @@ export const useQnAContext = () => {
 };
 
 const QnAContext = ({ children }) => {
+  const { errorHandler } = useErrorContext();
   const navigate = useNavigate;
   const date = new Date();
 
@@ -40,11 +41,6 @@ const QnAContext = ({ children }) => {
 
   // console.log("time", time);
 
-  const onQListClick = (e) => {
-    const seq = e.target.closest("TR").dataset.id;
-    alert(seq);
-  };
-
   const [qnaList, setQnAList] = useState([
     // {
     //   qna_seq: "",
@@ -58,7 +54,13 @@ const QnAContext = ({ children }) => {
     // },
   ]);
 
-  const updateButton = (qna_seq) => {};
+  const updateButton = async (e) => {
+    const seq = e.target.closest("TR").dataset.id;
+    alert(seq);
+    const res = await fetch("http://localhost:8080/qna/list");
+    const result = await res.json();
+    console.log("update", result);
+  };
 
   const deleteButton = () => {};
 
@@ -73,7 +75,6 @@ const QnAContext = ({ children }) => {
 
   const writeButton = async () => {
     // const { qna_seq, qna_id, qna_title, qna_name, qna_text, qna_email, qna_date } = qna;
-    alert("등록");
     // alert(qna_seq, qna_id, qna_title, qna_name, qna_text, qna_email, qna_date);
     const res = await fetch("http://localhost:8080/qna/write", {
       method: "POST",
@@ -85,15 +86,26 @@ const QnAContext = ({ children }) => {
 
     const result = await res.text();
 
-    if (res) {
+    const _isError = await errorHandler(res);
+    const { isError, message } = _isError;
+
+    if (isError) {
+      console.log(message);
+    } else {
+      console.log(message);
+      return;
+    }
+
+    // 백엔드 오류 검증
+    if (result === "OK") {
       console.log("result", result);
       setQnA({ qna_seq: "", qna_id: "", qna_title: "", qna_name: "", qna_text: "", qna_email: "", qna_date: "", qna_count: "" });
-      // navigate("/qna/list");
-      window.location.href = "/qna/list";
+      alert("등록 완료 !!");
+      window.location.replace("/qna/list");
     }
   };
 
-  const props = { onQListClick, qnaList, getqnaList, qna, writeButton, onChange };
+  const props = { updateButton, qnaList, getqnaList, qna, writeButton, onChange };
   return <AppContext.Provider value={props}>{children}</AppContext.Provider>;
 };
 

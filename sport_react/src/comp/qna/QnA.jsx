@@ -9,7 +9,7 @@ import { useQnAContext } from "./../../context/QnAContext";
 
 // 목표! useEffect를 사용하지 않고 화면 랜더링해보기
 const QnA = () => {
-  const { qnaList, onQListClick, getqnaList } = useQnAContext();
+  const { qnaList, updateButton, getqnaList } = useQnAContext();
 
   useEffect(getqnaList, []);
 
@@ -44,7 +44,7 @@ const QnA = () => {
             <th>조회수</th>
           </tr>
         </thead>
-        <tbody onClick={onQListClick}>{trList}</tbody>
+        <tbody onClick={updateButton}>{trList}</tbody>
       </table>
       <div className="">
         <Link to="/qna/write">

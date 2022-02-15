@@ -45,18 +45,24 @@ const SearchContext = ({ children }) => {
     },
   ]);
 
-  const GetDList = async () => {
+  const getDList = async () => {
     const res = await fetch("http://localhost:8080/search/");
     const result = await res.json();
     // console.log("result", result);
-    return result;
+
+    let resultArray = [];
+    for (let i = 0; i < 5; i++) {
+      resultArray.push(result[i]);
+    }
+
+    setDetailList(resultArray);
   };
 
   // const dtList = GetDList.forEach((item) => {
   //   console.log(item);
   // });
 
-  const props = { detailList, GetDList };
+  const props = { detailList, getDList };
   return <AppContext.Provider value={props}>{children}</AppContext.Provider>;
 };
 

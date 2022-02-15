@@ -3,9 +3,9 @@ import React, { useEffect } from "react";
 import { useSearchContext } from "./../../context/SearchContext";
 
 const Search = () => {
-  const { detailList, GetDList } = useSearchContext();
+  const { detailList, getDList } = useSearchContext();
 
-  // useEffect(GetDList, []);
+  useEffect(getDList, []);
 
   const dtList = detailList.map((list, index) => {
     return (
