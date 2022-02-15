@@ -9,3 +9,13 @@ tr:hover:not(.first) {
   cursor: pointer;
   color: darkblue;
 }
+
+.btn_qna {
+  margin-top: 20px;
+  /* margin-left: 0px auto; */
+}
+
+.btn_write {
+  display: inline-block;
+  margin-left: 0px auto;
+}

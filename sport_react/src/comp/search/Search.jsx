@@ -1,108 +1,127 @@
-import React from "react";
-import "../../css/search/search.css";
+import React, { useState } from "react";
+// import "../../css/search/search.css";
+import { useSearchContext } from "./../../context/SearchContext";
 
 const Search = () => {
+  // const {} = useSearchContext();
+
+  const [detailList, setDetailList] = useState([
+    {
+      al_seq: "1",
+      al_code: "염주 종합체육관",
+      al_tel: "062) 604 - 1400",
+      al_sport: "핸드볼, 농구, 배드민턴, 탁구, 배구",
+      al_addr: "광주광역시 서구 금화로 278",
+      al_free: "",
+    },
+    {
+      al_seq: "2",
+      al_code: "수완 인라인롤러경기장",
+      al_tel: "062) 604 - 1400",
+      al_sport: "인라인스케이트",
+      al_addr: "광주광역시 광산구 장덕로96번길 15",
+      al_free: "",
+    },
+  ]);
+
+  const dtList = detailList.map((list, index) => {
+    return (
+      <tr className="border-2 text-center" key={list.seq}>
+        <td className="p-5 text-center space-x-8">{index + 1}</td>
+        <td>{list.al_code}</td>
+        <td>{list.al_tel}</td>
+        <td>{list.al_sport}</td>
+        <td>{list.al_addr}</td>
+        <td>{list.al_free}</td>
+      </tr>
+    );
+  });
+
   return (
     // <div>Search</div>
-    <div>
-      <h1>광주광역시 체육시설 찾아보기</h1>
-      <table className="search">
-        {/* <!-- <caption>광주광역시 체육시설 찾아보기</caption> 표 제목 붙이기 --> */}
-        <tr className="search">
-          <th className="search">이용료</th>
-          <td>
-            <input id="ra" type="radio" name="ra" value="무료" /> 무료
-            <input id="ra" type="radio" name="ra" value="유료" /> 유료
-            <input id="ra" type="radio" name="ra" value="유/무료" /> 유/무료
-          </td>
-        </tr>
-        <tr className="search">
-          <th className="search">지역(구)</th>
-          <td>
-            <input id="ch" type="checkbox" name="ch" value="동구" /> 동구
-            <input id="ch" type="checkbox" name="ch" value="서구" /> 서구
-            <input id="ch" type="checkbox" name="ch" value="남구" /> 남구
-            <input id="ch" type="checkbox" name="ch" value="북구" /> 북구
-            <input id="ch" type="checkbox" name="ch" value="광산구" /> 광산구
-            <input id="all" type="checkbox" name="ch_all" value="전체" onclick="selectAll" />
-            전체
-          </td>
-        </tr>
-        <tr className="search">
-          <th className="search">지역(동)</th>
-          <td id="t3">
-            <input type="text" name="dong" />
-          </td>
-        </tr>
-        <tr className="search">
-          <th className="search">검색어</th>
-          <td id="t4">
-            <input type="text" size="20" name="search" />
-          </td>
-        </tr>
-        <tr className="search">
-          {/* <!-- 드롭다운 사용하기 --> */}
-          <th className="search">종목</th>
-          <td>
-            <select className="sports" name="input">
-              <option value="1">--- 종목 ---</option>
-              <option value="2">배드민턴</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-            </select>
-          </td>
-        </tr>
-        <tr className="search">
-          <td class="btn_src">
-            <button id="btn_search" type="button">
-              검색
-            </button>
-          </td>
-        </tr>
-      </table>
-      <table className="list">
-        <tr class="list first">
-          <th>번호</th>
+    <div className="flex flex-col justify-center items-center space-y-5 font-kr">
+      <h1 className="mt-10 font-bold text-3xl">광주광역시 체육시설 찾아보기</h1>
+      <div className="inline-block w-300 text-center border-2">
+        <div className="flex space-x-10 p-5">
+          <div className="">이용료</div>
+          {/* <div className="flex space-x-3 "> */}
+          <div className="flex items-center space-x-2">
+            <input id="ra" type="radio" name="ra1" value="무료" />
+            <label>무료</label>
+          </div>
+          <div className="flex items-center space-x-2">
+            <input id="ra" type="radio" name="ra2" value="유료" />
+            <label>유료</label>
+          </div>
+          <div className="flex items-center space-x-2">
+            <input id="ra" type="radio" name="ra3" value="유/무료" />
+            <label>유/무료</label>
+          </div>
+          {/* </div> */}
+        </div>
+        <div className="flex space-x-10 p-5">
+          <div>지역(구)</div>
+          <div className="flex space-x-3">
+            <div className="flex items-center space-x-2">
+              <input id="ch" type="checkbox" name="ch1" value="동구" />
+              <label>동구</label>
+            </div>
+            <div className="flex items-center space-x-2">
+              <input id="ch" type="checkbox" name="ch2" value="서구" />
+              <label>서구</label>
+            </div>
+            <div className="flex items-center space-x-2">
+              <input id="ch" type="checkbox" name="ch3" value="남구" />
+              <label>남구</label>
+            </div>
+            <div className="flex items-center space-x-2">
+              <input id="ch" type="checkbox" name="ch4" value="북구" />
+              <label>북구</label>
+            </div>
+            <div className="flex items-center space-x-2">
+              <input id="ch" type="checkbox" name="ch5" value="광산구" />
+              <label>광산구</label>
+            </div>
+            <div className="flex items-center space-x-2">
+              <input id="all" type="checkbox" name="ch_all" value="전체" onclick="selectAll" />
+              <label>전체</label>
+            </div>
+          </div>
+        </div>
+        <div className="flex space-x-10 p-5">
+          <div>지역(동)</div>
+          <div className="flex space-x-3 ">
+            <input className="border-2" type="text" name="dong" />
+          </div>
+        </div>
+        {/* <!-- 드롭다운 사용하기 --> */}
+        <div className="flex space-x-10 p-5">
+          <div className="m-30">종목</div>
+          {/* <div className="flex space-x-3"> */}
+          <select className="border-2">
+            <option value="1">--- 종목 ---</option>
+            <option value="2">배드민턴</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+          </select>
+          {/* </div> */}
+        </div>
+        <div>
+          <button type="button" className="pt-2 pr-3 pl-3 pb-2 hover:bg-slate-200 m-3">
+            검색
+          </button>
+        </div>
+      </div>
+      <table>
+        {/* 배열 데이터 만들어서 map 돌려서 출력하기 !! 제발제발제발제발제발제발 */}
+        <tr className="border-2 text-center w-">
+          <th className="p-4">번호</th>
           <th>시설 이름</th>
           <th>전화번호</th>
           <th>종목</th>
           <th>위치</th>
         </tr>
-        <tr>
-          <th>1</th>
-          <th>염주 종합체육관</th>
-          <th>062) 604 - 1400</th>
-          <th>핸드볼, 농구, 배드민턴, 탁구, 배구</th>
-          <th>광주광역시 서구 금화로 278</th>
-        </tr>
-        <tr>
-          <th>2</th>
-          <th>수완 인라인롤러경기장</th>
-          <th></th>
-          <th>인라인스케이트</th>
-          <th>광주광역시 광산구 장덕로96번길 15</th>
-        </tr>
-        <tr>
-          <th>3</th>
-          <th>광주여대시립유니버시아드체육관</th>
-          <th></th>
-          <th>배구, 농구, 핸드볼, 탁구, 배드민턴, 리듬체조</th>
-          <th>광주광역시 광산구 광주여대길 45</th>
-        </tr>
-        <tr>
-          <th>4</th>
-          <th>첨단 인라인스케이트장</th>
-          <th></th>
-          <th>인라인스케이트</th>
-          <th>광주 광산구 쌍암동</th>
-        </tr>
-        <tr>
-          <th>5</th>
-          <th>인공암벽장</th>
-          <th></th>
-          <th>인공 야외 암벽</th>
-          <th>광주광역시 서구 상무시민공원 내 위치</th>
-        </tr>
+        <tbody>{dtList}</tbody>
       </table>
     </div>
   );

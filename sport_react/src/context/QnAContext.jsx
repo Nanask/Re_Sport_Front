@@ -1,5 +1,6 @@
 import React from "react";
 import { createContext, useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const AppContext = createContext();
 
@@ -7,8 +8,10 @@ export const useQnAContext = () => {
   return useContext(AppContext);
 };
 
+let navigate = useNavigate;
+
 const QnAContext = ({ children }) => {
-  const [board, setboard] = useState({
+  const [qna, QnA] = useState({
     qna_seq: "",
     qna_id: "",
     qna_title: "",
@@ -19,12 +22,12 @@ const QnAContext = ({ children }) => {
     qna_count: "",
   });
 
-  const onBoardClick = (e) => {
+  const onQListClick = (e) => {
     const seq = e.target.closest("TR").dataset.id;
     alert(seq);
   };
 
-  const [boardList, setBoardList] = useState([
+  const [qnaList, setQnAList] = useState([
     // {
     //   qna_seq: "",
     //   qna_id: "",
@@ -37,16 +40,21 @@ const QnAContext = ({ children }) => {
     // },
   ]);
 
-  // const qnaList = async () => {
-  //   const res = await fetch("http://localhost:8080/qna/list");
-  //   const result = await res.json();
-  //   setBoardList(result);
-  //   console.log("result", result);
-  //   console.log("board", boardList);
-  //   // console.log("boardList", boardList);
-  // };
+  const GetqnaList = async () => {
+    const res = await fetch("http://localhost:8080/qna/list");
+    const result = await res.json();
+    setQnAList(result);
+    console.log("result", result);
+    console.log("qnaList", qnaList);
+    // return result;
+  };
 
-  const props = { onBoardClick, boardList, setBoardList, board, setboard };
+  const WriteButton = (e) => {
+    alert("detail");
+    navigate("/qna/detail");
+  };
+
+  const props = { onQListClick, qnaList, WriteButton, GetqnaList };
   return <AppContext.Provider value={props}>{children}</AppContext.Provider>;
 };
 

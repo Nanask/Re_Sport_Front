@@ -30,7 +30,7 @@ section.contents {
   overflow: hidden;
   top: 0;
 }
-section.contents > div.sq_box {
+/* section.contents > div.sq_box {
   background-color: rgba(152, 118, 207, 0.3);
   height: 3000px;
   width: 2000px;
@@ -41,7 +41,7 @@ section.contents > div.sq_box {
   top: -10%;
   left: 10%;
   overflow: hidden;
-}
+} */
 
 section.contents {
   background-size: cover;
@@ -85,7 +85,6 @@ div > div#box1 h1 {
   font-size: 60px;
   visibility: hidden;
   margin: 50px auto;
-  /* visibility: hidden; 영역을 차지하면서 숨김 */
 }
 
 div > div#box1:hover {
@@ -98,8 +97,6 @@ div > div#box1:hover {
 div > div#box1:hover h1 {
   visibility: visible;
   transition: 0.5s;
-  /* text-align: center; */
-  /* 보이게 하기 */
 }
 
 div#box2 h1 {
@@ -109,7 +106,6 @@ div#box2 h1 {
   font-size: 60px;
   visibility: hidden;
   margin: 50px auto;
-  /* visibility: hidden; 영역을 차지하면서 숨김 */
 }
 
 div#box2:hover {
@@ -122,8 +118,6 @@ div#box2:hover {
 div#box2:hover h1 {
   visibility: visible;
   transition: 0.5s;
-  /* text-align: center; */
-  /* 보이게 하기 */
 }
 
 div#box3 h1 {
@@ -134,7 +128,7 @@ div#box3 h1 {
   visibility: hidden;
   margin: 50px auto;
   word-spacing: 5px;
-  /* visibility: hidden; 영역을 차지하면서 숨김 */
+  visibility: hidden;
 }
 
 div#box3:hover {
@@ -147,8 +141,7 @@ div#box3:hover {
 div#box3:hover h1 {
   visibility: visible;
   transition: 0.5s;
-  /* text-align: center; */
-  /* 보이게 하기 */
+  text-align: center;
 }
 
 div#box1 {

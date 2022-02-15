@@ -6,26 +6,28 @@ import MainLogo from "../../image/logo.png";
 const Nav = () => {
   return (
     // <BrowserRouter>
-    <nav id="main_nav">
+    <nav id="main_nav" className="flex items-center justify-between text-2xl text-stone-500 font-bold m-0 border-2">
       <Link to="/">
-        <img src={MainLogo}></img>
+        {/* <img src={MainLogo} className="w-34 h-16"></img> */}
+        <div className="font-bold text-4xl m-5">GPC</div>
       </Link>
-      <ul>
-        <li>
+      <ul className="flex space-x-10 m-5 ">
+        <li className="hover:text-red-500 transition">
           <Link to="/search">Search</Link>
         </li>
-        <li>
+        <li className="hover:text-red-500 transition">
           <Link to="/map">Map</Link>
         </li>
-        <li>
-          <Link to="/qna">qna</Link>
+        <li className="hover:text-red-500 transition">
+          <Link to="/qna/list">QnA</Link>
         </li>
-        <li>
-          <Link to="/login">Login </Link> <i class="fas fa-user-circle fa-lg"></i>
+        <li className="hover:text-red-500 transition">
+          <Link to="/login">Login </Link>
+          {/* <i class="fas fa-user-circle fa-lg"></i>  */}
         </li>
-        <li>
+        <li className="hover:text-red-500 transition">
           <Link to="/join">Join</Link>
-          <i class="fas fa-pencil-alt fa-lg"></i>
+          {/* <i class="fas fa-pencil-alt fa-lg"></i> */}
         </li>
       </ul>
     </nav>

@@ -1,11 +1,11 @@
-table.search {
+/* table.search {
   margin-left: auto;
   margin-right: auto;
   width: 70%;
 }
 
 table.search,
-td,
+td.search,
 th.search {
   border-collapse: separate;
   border-spacing: 1px;
@@ -42,4 +42,4 @@ select.sports {
 
 table.list {
   margin: 50px auto;
-}
+} */

@@ -1,4 +1,6 @@
 import React, { useCallback, useEffect } from "react";
+import { Link } from "react-router-dom";
+// import "../../css/qna/qna.css";
 // 함수
 import { useQnAContext } from "./../../context/QnAContext";
 // 컨텍스트
@@ -7,20 +9,11 @@ import { useQnAContext } from "./../../context/QnAContext";
 
 // 목표! useEffect를 사용하지 않고 화면 랜더링해보기
 const QnA = () => {
-  const { boardList, onBoardClick, setBoardList } = useQnAContext();
+  const { qnaList, onQListClick, WriteButton, GetqnaList } = useQnAContext();
 
-  const qnaList = async () => {
-    const res = await fetch("http://localhost:8080/qna/list");
-    const result = await res.json();
-    setBoardList(result);
-    console.log("result", result);
-    console.log("board", boardList);
-    // return result;
-  };
+  useEffect(GetqnaList, []);
 
-  useEffect(qnaList, []);
-
-  const trList = boardList.map((sample, index) => {
+  const trList = qnaList.map((sample, index) => {
     return (
       <tr data-id={sample.qna_seq} key={sample.qna_seq}>
         <td>{index + 1}</td>
@@ -51,8 +44,13 @@ const QnA = () => {
             <th>조회수</th>
           </tr>
         </thead>
-        <tbody onClick={onBoardClick}>{trList}</tbody>
+        <tbody onClick={onQListClick}>{trList}</tbody>
       </table>
+      <div className="btn_qna">
+        <Link to="/qna/detail">
+          <button className="btn_write">작성하기</button>
+        </Link>
+      </div>
     </div>
   );
 };

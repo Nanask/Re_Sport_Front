@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Link, Route, useHistory } from "react-router-dom";
 import "../../css/main/main.css";
-import "../../css/main/layout.css";
+// import "../../css/main/layout.css";
 import Search from "./../search/Search";
 import { useNavigate } from "react-router-dom";
 
@@ -13,40 +13,31 @@ const Main = () => {
   // };
   return (
     // <BrowserRouter>
-    <div className="main_div">
-      <div id="s_left"></div>
-      <div id="s_right"></div>
-      <section class="contents">
-        <h2>FIRST PROJECT GPC</h2>
-        <div class="sq_box"></div>
+    <div className="flex justify-center space-y-4">
+      <h2 className="text-6xl mt-28">Gwangju Project Center</h2>
+      <section className="flex justify-center">
         <div class="main_box">
           {/* <Route path="/search" element={<Search />}> */}
-          <div id="box1">
+          <div className="border-2 flex items-center justify-center hover:cursor-pointer hover:text-white hover:bg-red-500 transition">
             <Link to="/search">
-              <i class="fas fa-search fa-7x"></i>
-              <h1>search</h1>
+              <i class="fas fa-search fa-5x"></i>
+              <h1 className="mt-5 text-3xl">Search</h1>
             </Link>
           </div>
           {/* </Route> */}
-          <div id="box2">
+          <div className="border-2 flex items-center justify-center hover:cursor-pointer hover:text-white hover:bg-red-500 transition">
             <Link to="/map">
-              <i class="fas fa-map-marked-alt fa-7x"></i>
-              <h1>map</h1>
+              <i class="fas fa-map-marked-alt fa-5x"></i>
+              <h1 className="mt-5 text-3xl mx-3">Map</h1>
             </Link>
           </div>
-          <div id="box3">
+          <div className="border-2 flex items-center justify-center hover:cursor-pointer hover:text-white hover:bg-red-500 transition">
             <Link to="/qna/list">
-              <i class="fas fa-edit fa-7x"></i>
-              <h1>Q&A</h1>
+              <i class="fas fa-edit fa-5x"></i>
+              <h1 className="mt-5 text-3xl mx-3">Q&A</h1>
             </Link>
           </div>
         </div>
-        <p class="text1">
-          우리 주변에 체육시설을 감색과 위치, 지도를 사용해
-          <br />
-          빠르고 정확하게 찾을 수 있게 도와드립니다
-        </p>
-        <footer>CopyRight&copy;GPC2021@gamil.com</footer>
       </section>
     </div>
     // </BrowserRouter>

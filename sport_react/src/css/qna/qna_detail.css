@@ -1,50 +1,60 @@
-div {
+/* div {
   margin: 20px auto;
   padding: 10px 0 30px 0;
-}
+} */
 
-div.h2,
-div.table,
-div.button {
+/* .h2,
+.detail_table table,
+.detail_btn {
   display: flex;
   justify-content: center;
 }
 
-table,
-tr,
-th {
+.detail_table table,
+.detail_table tr,
+.detail_table th {
   border: 1px solid #6a60a9;
-  border-collapse: collapse;
   text-align: center;
   padding: 6px;
 }
 
-table,
-tr {
+.detail_table td {
+  width: 100%;
+}
+.detail_table tr {
   width: 60%;
 }
 
-th.sec1 {
+.detail_table th.sec1 {
   background-color: #dedcee;
 }
 
-input,
-textarea {
-  border: none;
-  outline: none;
+.detail_table input,
+.detail_table textarea {
   width: 100%;
 }
 
-button {
+.detail_btn {
+  display: flex;
   border: none;
-  width: 10%;
+  outline: none;
   height: 40px;
   font-weight: bold;
-  margin-left: 12px;
-  margin-right: 12px;
 }
 
-button:hover {
+.detail_btn enter,
+.detail_btn reset:hover {
   background-color: #dedcee;
   cursor: pointer;
+} */
+
+.qna_detail h2 {
+  margin: 20px auto;
+  padding: 10px 0 30px 0;
+}
+
+.detail_table {
+}
+
+.detail_table.th {
 }
