@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 // import "../../css/search/search.css";
 import { useSearchContext } from "./../../context/SearchContext";
+import UseInput from "./../custom/UseInput";
 
 const Search = () => {
   const { detailList, getDList } = useSearchContext();
@@ -28,7 +29,10 @@ const Search = () => {
         <div className="flex space-x-10 p-5">
           <div className="">이용료</div>
           {/* <div className="flex space-x-3 "> */}
-          <div className="flex items-center space-x-2">
+          <UseInput type="radio" name="radio" id="radio1" label="유료" />
+          <UseInput type="radio" name="radio" id="radio2" label="무료" />
+          <UseInput type="radio" name="radio" id="radio3" label="유/무료" />
+          {/* <div className="flex items-center space-x-2">
             <input id="ra" type="radio" name="ra1" value="무료" />
             <label>무료</label>
           </div>
@@ -39,13 +43,20 @@ const Search = () => {
           <div className="flex items-center space-x-2">
             <input id="ra" type="radio" name="ra3" value="유/무료" />
             <label>유/무료</label>
-          </div>
+          </div> */}
           {/* </div> */}
         </div>
         <div className="flex space-x-10 p-5">
           <div>지역(구)</div>
           <div className="flex space-x-3">
-            <div className="flex items-center space-x-2">
+            <UseInput type="checkbox" name="check1" id="check1" label="동구" />
+            <UseInput type="checkbox" name="check2" id="check2" label="서구" />
+            <UseInput type="checkbox" name="check3" id="check3" label="남구" />
+            <UseInput type="checkbox" name="check4" id="check4" label="북구" />
+            <UseInput type="checkbox" name="check5" id="check5" label="광산구" />
+            <UseInput type="checkbox" name="check6" id="check6" label="전체" />
+
+            {/* <div className="flex items-center space-x-2">
               <input id="ch" type="checkbox" name="ch1" value="동구" />
               <label>동구</label>
             </div>
@@ -68,7 +79,7 @@ const Search = () => {
             <div className="flex items-center space-x-2">
               <input id="all" type="checkbox" name="ch_all" value="전체" onclick="selectAll" />
               <label>전체</label>
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="flex space-x-10 p-5">

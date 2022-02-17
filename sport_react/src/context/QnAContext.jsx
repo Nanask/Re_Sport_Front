@@ -11,17 +11,6 @@ export const useQnAContext = () => {
 const QnAContext = ({ children }) => {
   const { errorHandler } = useErrorContext();
   const navigate = useNavigate;
-  const date = new Date();
-
-  let time = {
-    year: date.getFullYear(), //현재 년도
-    month: date.getMonth() + 1, // 현재 월
-    date: date.getDate(), // 현제 날짜
-    hours: date.getHours(), //현재 시간
-    minutes: date.getMinutes(), //현재 분
-  };
-
-  time = `${time.year}/${time.month}/${time.date} ${time.hours}:${time.minutes}`;
 
   const onChange = (e) => {
     const { value, name } = e.target;
