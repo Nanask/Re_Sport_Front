@@ -15,7 +15,7 @@ const QnA = () => {
 
   const trList = qnaList.map((sample, index) => {
     return (
-      <tr className="border-2" data-id={sample.qna_seq} key={sample.qna_seq}>
+      <tr className="border-2" data-id={sample.qna_seq} key={sample.qna_seq} onClick={updateButton}>
         <td>{index + 1}</td>
         <td>{sample.qna_id}</td>
         <td className="overflow-hidden text-ellipsis whitespace-nowrap">{sample.qna_title}</td>
@@ -44,7 +44,7 @@ const QnA = () => {
             <th>조회수</th>
           </tr>
         </thead>
-        <tbody onClick={updateButton}>{trList}</tbody>
+        <tbody>{trList}</tbody>
       </table>
       <div className="">
         <Link to="/qna/write">

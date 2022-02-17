@@ -45,10 +45,9 @@ const QnAContext = ({ children }) => {
 
   const updateButton = async (e) => {
     const seq = e.target.closest("TR").dataset.id;
-    alert(seq);
     const res = await fetch("http://localhost:8080/qna/list");
     const result = await res.json();
-    console.log("update", result);
+    // console.log("update", result);
   };
 
   const deleteButton = () => {};
