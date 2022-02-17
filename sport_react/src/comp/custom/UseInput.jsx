@@ -1,25 +1,14 @@
 import React from "react";
 import { useState } from "react";
+import { useSearchContext } from "../../context/SearchContext";
 
 // validator 유효성검사
 
-const UseInput = ({ name, string, type, label, id }) => {
-  const [checkedInput, setCheckedInput] = useState();
-
-  const onChangeHandler = (checked, name) => {
-    if (checked) {
-      setCheckedInput([...checkedInput, name]);
-      console.log(checkedInput);
-    } else {
-      setCheckedInput(checkedInput.filter((check) => check !== name));
-      console.log(checkedInput);
-    }
-  };
-
+const UseInput = ({ name, type, label, id, value, propChange }) => {
   return (
     <div className="flex items-center space-x-2">
-      <input type={type} name={name} onChange={(e) => onChangeHandler(e.target.checked, e.target.name)} />
-      {label && <label htmlfor={id ? id : name}>{label}</label>}
+      <input type={type} name={name} id={id} value={value} onChange={propChange} />
+      <label>{label}</label>
     </div>
   );
 };
