@@ -1,7 +1,9 @@
 import React, { createContext, useContext, useState, useParams } from "react";
 import { useNavigate } from "react-router-dom";
 import UseInput from "../comp/custom/UseInput";
+import { DeleteFetchOption, PostFetchOption } from "../modules/FetchOption";
 import { useErrorContext } from "./ErrorContext";
+import { PutFetchOption } from "./../modules/FetchOption";
 
 const AppContext = createContext();
 
@@ -81,13 +83,13 @@ const QnAContext = ({ children }) => {
     return <UseInput type={item.type} name={item.name} id={item.id} label={item.label}></UseInput>;
   });
 
-  const fetchOption = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(qna),
-  };
+  // const fetchOption = {
+  //   method: "POST",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //   },
+  //   body: JSON.stringify(qna),
+  // };
 
   const errorCheck = async (res) => {
     const _isError = await errorHandler(res);
@@ -117,14 +119,9 @@ const QnAContext = ({ children }) => {
   const updateButton = async () => {
     const { qna_seq, qna_title, qna_id, qna_name, qna_email, qna_text } = qna;
 
-    console.log("qna", qna_seq, qna_title, qna_id, qna_name, qna_email, qna_text);
-    const res = await fetch(`http://localhost:8080/qna/${qna_seq}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(qna),
-    });
+    // console.log("qna", qna_seq, qna_title, qna_id, qna_name, qna_email, qna_text);
+    PutFetchOption.body = JSON.stringify(qna);
+    const res = await fetch(`http://localhost:8080/qna/${qna_seq}`, PutFetchOption);
     const result = await res.json();
     console.log("result", result);
     setQnA(result);
@@ -141,13 +138,8 @@ const QnAContext = ({ children }) => {
 
   const deleteButton = async () => {
     const { qna_seq } = qna;
-    const res = await fetch(`http://localhost:8080/qna/${qna_seq}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(qna),
-    });
+    DeleteFetchOption.body = JSON.stringify(qna);
+    const res = await fetch(`http://localhost:8080/qna/${qna_seq}`, DeleteFetchOption);
     const result = await res.text();
     console.log("result", result);
     window.location.replace("/qna/");
@@ -168,7 +160,8 @@ const QnAContext = ({ children }) => {
   // 글 추가하기
   const writeButton = async () => {
     writeOnClick();
-    const res = await fetch("http://localhost:8080/qna/", fetchOption);
+    PostFetchOption.body = JSON.stringify(qna);
+    const res = await fetch("http://localhost:8080/qna/", PostFetchOption);
     const result = await res.text();
     errorCheck();
 
