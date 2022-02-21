@@ -101,13 +101,13 @@ const SearchContext = ({ children }) => {
     },
     {
       type: "checkbox",
-      name: "check2",
+      name: "qna_id",
       id: "check2",
       label: "서구",
     },
     {
       type: "checkbox",
-      name: "check3",
+      name: "",
       id: "check3",
       label: "남구",
     },

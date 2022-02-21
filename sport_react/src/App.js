@@ -11,6 +11,7 @@ import QnAContext from "./context/QnAContext";
 import QnA_Detail from "./comp/qna/QnA_Write";
 import SearchContext from "./context/SearchContext";
 import ErrorHandlerContext from "./context/ErrorContext";
+// import QnA_Detail from "./comp/qna/QnA_Write";
 
 function App() {
   return (
@@ -26,7 +27,7 @@ function App() {
                 <Route path="/join" element={<Join />}></Route>
                 <Route path="/search/*" element={<Search />}></Route>
                 <Route path="/map/*" element={<Map />}></Route>
-                <Route path="/qna/list" element={<QnA />}></Route>
+                <Route path="/qna/*" element={<QnA />}></Route>
                 <Route path="/qna/write" element={<QnA_Detail />}></Route>
               </Routes>
             </div>

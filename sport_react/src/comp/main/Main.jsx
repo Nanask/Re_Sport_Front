@@ -32,7 +32,7 @@ const Main = () => {
             </Link>
           </div>
           <div className="border-2 flex items-center justify-center hover:cursor-pointer hover:text-white hover:bg-red-500 transition">
-            <Link to="/qna/list">
+            <Link to="/qna/">
               <i class="fas fa-edit fa-5x"></i>
               <h1 className="mt-5 text-3xl mx-3">Q&A</h1>
             </Link>

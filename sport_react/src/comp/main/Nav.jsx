@@ -1,15 +1,17 @@
 import React from "react";
-import { BrowserRouter, Link } from "react-router-dom";
+import { BrowserRouter, Link, Routes, Route } from "react-router-dom";
 import "../../css/main/nav.css";
 import MainLogo from "../../image/logo.png";
+import Main from "./Main";
 
 const Nav = () => {
   return (
-    // <BrowserRouter>
+    // <Routes>
     <nav id="main_nav" className="flex items-center justify-between text-2xl text-stone-500 font-bold m-0 border-2">
       <Link to="/">
         {/* <img src={MainLogo} className="w-34 h-16"></img> */}
         <div className="font-bold text-4xl m-5">GPC</div>
+        {/* </Route> */}
       </Link>
       <ul className="flex space-x-10 m-5 ">
         <li className="hover:text-red-500 transition">
@@ -19,7 +21,7 @@ const Nav = () => {
           <Link to="/map">Map</Link>
         </li>
         <li className="hover:text-red-500 transition">
-          <Link to="/qna/list">QnA</Link>
+          <Link to="/qna/">QnA</Link>
         </li>
         <li className="hover:text-red-500 transition">
           <Link to="/login">Login </Link>
@@ -31,7 +33,7 @@ const Nav = () => {
         </li>
       </ul>
     </nav>
-    // </BrowserRouter>
+    // </Routes>
   );
 };
 
