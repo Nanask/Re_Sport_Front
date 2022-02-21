@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, useParams } from "react";
 import { useNavigate } from "react-router-dom";
 import UseInput from "../comp/custom/UseInput";
 import { useErrorContext } from "./ErrorContext";
@@ -125,7 +125,7 @@ const QnAContext = ({ children }) => {
       },
       body: JSON.stringify(qna),
     });
-    const result = res.json();
+    const result = await res.json();
     console.log("result", result);
     setQnA(result);
     console.log("qna", qna);
@@ -139,7 +139,19 @@ const QnAContext = ({ children }) => {
     // }
   };
 
-  const deleteButton = () => {};
+  const deleteButton = async () => {
+    const { qna_seq } = qna;
+    const res = await fetch(`http://localhost:8080/qna/${qna_seq}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(qna),
+    });
+    const result = await res.text();
+    console.log("result", result);
+    window.location.replace("/qna/");
+  };
 
   // qna 데이터 전체 보여주기
   const getqnaList = async () => {
@@ -157,9 +169,7 @@ const QnAContext = ({ children }) => {
   const writeButton = async () => {
     writeOnClick();
     const res = await fetch("http://localhost:8080/qna/", fetchOption);
-
     const result = await res.text();
-
     errorCheck();
 
     // 백엔드 오류 검증
@@ -171,7 +181,7 @@ const QnAContext = ({ children }) => {
     }
   };
 
-  const props = { findByIdButton, qnaList, getqnaList, qnaInput, qna, writeButton, onChange, writeOnClick, updateButton };
+  const props = { findByIdButton, qnaList, getqnaList, qnaInput, qna, writeButton, onChange, writeOnClick, updateButton, deleteButton };
   return <AppContext.Provider value={props}>{children}</AppContext.Provider>;
 };
 

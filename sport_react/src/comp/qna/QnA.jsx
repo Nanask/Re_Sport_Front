@@ -48,11 +48,9 @@ const QnA = () => {
         <tbody>{trList}</tbody>
       </table>
       <div className="">
-        {/* <Link to="/qna/write"> */}
         <button className="mt-10 ml-auto inline-block mr-30 pt-2 pr-3 pl-3 pb-2 hover:bg-slate-200 m-3" onClick={writeOnClick}>
           작성하기
         </button>
-        {/* </Link> */}
       </div>
     </div>
   );

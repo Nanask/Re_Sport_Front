@@ -8,10 +8,9 @@ import QnA from "./comp/qna/QnA";
 import Login from "./comp/member/Login";
 import Join from "./comp/member/Join";
 import QnAContext from "./context/QnAContext";
-import QnA_Detail from "./comp/qna/QnA_Write";
+import QnA_Write from "./comp/qna/QnA_Write";
 import SearchContext from "./context/SearchContext";
 import ErrorHandlerContext from "./context/ErrorContext";
-// import QnA_Detail from "./comp/qna/QnA_Write";
 
 function App() {
   return (
@@ -28,7 +27,8 @@ function App() {
                 <Route path="/search/*" element={<Search />}></Route>
                 <Route path="/map/*" element={<Map />}></Route>
                 <Route path="/qna/*" element={<QnA />}></Route>
-                <Route path="/qna/write" element={<QnA_Detail />}></Route>
+                <Route path="/qna/write" element={<QnA_Write />}></Route>
+                <Route path="/qna/:qna_seq" element={<QnA_Write />}></Route>
               </Routes>
             </div>
           </QnAContext>
