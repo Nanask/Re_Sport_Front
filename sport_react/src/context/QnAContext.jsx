@@ -83,14 +83,7 @@ const QnAContext = ({ children }) => {
     return <UseInput type={item.type} name={item.name} id={item.id} label={item.label}></UseInput>;
   });
 
-  // const fetchOption = {
-  //   method: "POST",
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //   },
-  //   body: JSON.stringify(qna),
-  // };
-
+  // 오류체크
   const errorCheck = async (res) => {
     const _isError = await errorHandler(res);
     const { isError, message } = _isError;
@@ -110,51 +103,71 @@ const QnAContext = ({ children }) => {
     console.log("seq", qna_seq);
     const res = await fetch(`http://localhost:8080/qna/${qna_seq}`);
     const result = await res.json();
-    setQnA(result);
-    console.log("update", result);
-    // alert("qna", qna);
+
+    await errorCheck(res);
+
+    if (res?.ok) {
+      setQnA(result);
+      console.log("update", result);
+    } else {
+      return [];
+    }
   };
 
   // update
   const updateButton = async () => {
     const { qna_seq, qna_title, qna_id, qna_name, qna_email, qna_text } = qna;
-
-    // console.log("qna", qna_seq, qna_title, qna_id, qna_name, qna_email, qna_text);
     PutFetchOption.body = JSON.stringify(qna);
     const res = await fetch(`http://localhost:8080/qna/${qna_seq}`, PutFetchOption);
     const result = await res.json();
     console.log("result", result);
-    setQnA(result);
-    console.log("qna", qna);
-    window.location.replace("/qna/");
 
-    // errorCheck();
+    errorCheck(res);
 
-    // if (result?.ok) {
-    // console.log("result", result);
-    //   setQnA({ result });
-    // }
+    if (res?.ok) {
+      console.log("result", result);
+      setQnA(result);
+      navigate("/qna/", true);
+    } else {
+      return [];
+    }
   };
 
+  //삭제
   const deleteButton = async () => {
     const { qna_seq } = qna;
     DeleteFetchOption.body = JSON.stringify(qna);
     const res = await fetch(`http://localhost:8080/qna/${qna_seq}`, DeleteFetchOption);
     const result = await res.text();
-    console.log("result", result);
-    window.location.replace("/qna/");
+
+    errorCheck(res);
+
+    if (res?.ok) {
+      console.log("result", result);
+      navigate("/qna/", true);
+    } else {
+      return [];
+    }
   };
 
   // qna 데이터 전체 보여주기
   const getqnaList = async () => {
     const res = await fetch("http://localhost:8080/qna/");
     const result = await res.json();
-    setQnAList(result);
+
+    errorCheck(res);
+
+    if (res?.ok) {
+      setQnAList(result);
+    } else {
+      return [];
+    }
   };
 
   // /qna/write url로 이동
   const writeOnClick = (e) => {
-    navigate("/qna/write");
+    setQnA({});
+    navigate("/qna/write", true);
   };
 
   // 글 추가하기
@@ -163,14 +176,15 @@ const QnAContext = ({ children }) => {
     PostFetchOption.body = JSON.stringify(qna);
     const res = await fetch("http://localhost:8080/qna/", PostFetchOption);
     const result = await res.text();
-    errorCheck();
+
+    await errorCheck(res);
 
     // 백엔드 오류 검증
     if (result === "OK") {
       console.log("result", result);
       setQnA({ qna_seq: "", qna_id: "", qna_title: "", qna_name: "", qna_text: "", qna_email: "", qna_date: "", qna_count: "" });
       alert("등록 완료 !!");
-      window.location.replace("/qna/");
+      navigate("/qna/", true);
     }
   };
 
