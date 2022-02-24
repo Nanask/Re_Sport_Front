@@ -3,7 +3,7 @@ import { useSearchContext } from "./../../context/SearchContext";
 import UseInput from "./../custom/UseInput";
 
 const Search = () => {
-  const { detailList, getDList, onChangeHandler, dtList, checkBoxList, radioList } = useSearchContext();
+  const { getDList, dtList, onSearchClick, checkBoxList, radioList } = useSearchContext();
 
   useEffect(getDList, []);
 
@@ -35,7 +35,7 @@ const Search = () => {
           </select>
         </div>
         <div>
-          <button type="button" className="pt-2 pr-3 pl-3 pb-2 hover:bg-slate-200 m-3">
+          <button type="button" onClick={onSearchClick} className="pt-2 pr-3 pl-3 pb-2 hover:bg-slate-200 m-3">
             검색
           </button>
         </div>
@@ -47,6 +47,7 @@ const Search = () => {
           <th>전화번호</th>
           <th>종목</th>
           <th>위치</th>
+          <th>이용료</th>
         </tr>
         <tbody>{dtList}</tbody>
       </table>

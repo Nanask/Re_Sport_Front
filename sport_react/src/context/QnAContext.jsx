@@ -1,9 +1,10 @@
-import React, { createContext, useContext, useState, useParams } from "react";
+import React, { createContext, useContext, useState, useParams, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import UseInput from "../comp/custom/UseInput";
 import { DeleteFetchOption, PostFetchOption } from "../modules/FetchOption";
 import { useErrorContext } from "./ErrorContext";
 import { PutFetchOption } from "./../modules/FetchOption";
+import Button from "./../comp/custom/Button";
 
 const AppContext = createContext();
 
@@ -14,10 +15,12 @@ export const useQnAContext = () => {
 const QnAContext = ({ children }) => {
   const { errorHandler } = useErrorContext();
   const navigate = useNavigate();
+  const inputId = useRef();
 
   const onChange = (e) => {
     const { value, name } = e.target;
     // console.log("name", value);
+
     setQnA({ ...qna, [name]: value });
   };
   const [qna, setQnA] = useState({
@@ -83,6 +86,33 @@ const QnAContext = ({ children }) => {
     return <UseInput type={item.type} name={item.name} id={item.id} label={item.label}></UseInput>;
   });
 
+  const resetButton = (e) => {
+    setQnA({ qna_title: "", qna_id: "", qna_email: "", qna_name: "", qna_text: "" });
+  };
+
+  // const writeButtons = (qna) => [
+  //   {
+  //     type: "button",
+  //     button: "수정",
+  //   },
+  //   {
+  //     type: "button",
+  //     button: "등록",
+  //   },
+  //   {
+  //     type: "button",
+  //     button: "삭제",
+  //   },
+  //   {
+  //     type: "reset",
+  //     button: "다시 작성",
+  //   },
+  // ];
+
+  // const writebutton = writeButtons.map((item) => {
+  //   return <Button type={item.type} button={item.button}></Button>;
+  // });
+
   // 오류체크
   const errorCheck = async (res) => {
     const _isError = await errorHandler(res);
@@ -104,7 +134,7 @@ const QnAContext = ({ children }) => {
     const res = await fetch(`http://localhost:8080/qna/${qna_seq}`);
     const result = await res.json();
 
-    await errorCheck(res);
+    // await errorCheck(res);
 
     if (res?.ok) {
       setQnA(result);
@@ -133,7 +163,7 @@ const QnAContext = ({ children }) => {
     }
   };
 
-  //삭제
+  // delete
   const deleteButton = async () => {
     const { qna_seq } = qna;
     DeleteFetchOption.body = JSON.stringify(qna);
@@ -166,13 +196,34 @@ const QnAContext = ({ children }) => {
 
   // /qna/write url로 이동
   const writeOnClick = (e) => {
+    alert("작성");
     setQnA({});
     navigate("/qna/write", true);
   };
 
-  // 글 추가하기
+  const checkData = (value) => {
+    console.log();
+  };
+
+  // insert
   const writeButton = async () => {
-    writeOnClick();
+    if (qna.qna_title === "") {
+      alert("제목을 입력해주세요");
+      return;
+    } else if (qna.qna_id === "") {
+      alert("ID를 입력해주세요");
+      return;
+    } else if (qna.qna_email === "") {
+      alert("email를 입력해주세요");
+      return;
+    } else if (qna.qna_name === "") {
+      alert("시설이름을 입력해주세요");
+      return;
+    } else if (qna.qna_text === "") {
+      alert("내용을 입력해주세요");
+      return;
+    }
+
     PostFetchOption.body = JSON.stringify(qna);
     const res = await fetch("http://localhost:8080/qna/", PostFetchOption);
     const result = await res.text();
@@ -188,7 +239,7 @@ const QnAContext = ({ children }) => {
     }
   };
 
-  const props = { findByIdButton, qnaList, getqnaList, qnaInput, qna, writeButton, onChange, writeOnClick, updateButton, deleteButton };
+  const props = { findByIdButton, qnaList, getqnaList, qnaInput, qna, writeButton, onChange, writeOnClick, updateButton, deleteButton, resetButton };
   return <AppContext.Provider value={props}>{children}</AppContext.Provider>;
 };
 

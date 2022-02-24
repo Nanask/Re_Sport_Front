@@ -3,7 +3,7 @@ import React from "react";
 import { useQnAContext } from "./../../context/QnAContext";
 
 const QnA_Write = () => {
-  const { qna, writeButton, onChange, updateButton, deleteButton } = useQnAContext();
+  const { qna, writeButton, onChange, updateButton, deleteButton, buttons, resetButton } = useQnAContext();
   return (
     <div>
       <div className="flex flex-col justify-center items-center space-y-5 font-kr p-5">
@@ -43,9 +43,10 @@ const QnA_Write = () => {
         <button className="mr-10 hover:bg-slate-200 pt-2 pr-3 pl-3 pb-2" onClick={deleteButton}>
           삭제
         </button>
-        <button className="mr-10 hover:bg-slate-200 pt-2 pr-3 pl-3 pb-2" type="reset">
+        <button className="mr-10 hover:bg-slate-200 pt-2 pr-3 pl-3 pb-2" type="button" onClick={resetButton}>
           다시 쓰기
         </button>
+        {/* {buttons} */}
       </div>
     </div>
   );

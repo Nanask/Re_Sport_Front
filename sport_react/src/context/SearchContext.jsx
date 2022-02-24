@@ -46,23 +46,35 @@ const SearchContext = ({ children }) => {
     },
   ]);
 
+  const [checkedItems, setCheckedItems] = useState(false);
+
   const onChangeHandler = (e) => {
-    // const { name, value } = e.target;
-    const { checked, value, name } = e.target;
-    console.log("value", value);
-    console.log("checkId", checked);
-    // console.log("dddddd");
+    const { checked, value, id } = e.target;
+    if (checked) {
+      console.log("checked", value, id);
+      setCheckedItems([...checkBoxItems, id, value]);
+      console.log("checkedItems", checkBoxItems);
+    }
+    // console.log("value", value);
+    // console.log("checkId", checked);
+    // console.log("id", id);
+
+    // if (checked) {
+    //   setCheckedInput([...checkedInput, id, value]);
     // }
-    // if (type === "checkbox") {
-    //   if (checked) {
-    //     setCheckedInput([...checkedInput, name]);
-    //     console.log(checkedInput);
-    //   } else {
-    //     setCheckedInput(checkedInput.filter((check) => check !== name));
-    //     console.log(checkedInput);
-    // }
-    // }
-    // console.log("라라라라라라");
+
+    // setCheckedInput([...checkedInput]);
+    // console.log("checked", checkedInput);
+  };
+
+  const onSearchClick = async (e) => {
+    const { checked, value, id } = search;
+    console.log("search", checkBoxItems);
+    const res = await fetch("http://localhost:8080/search/");
+
+    const result = await res.text();
+    console.log("result", result);
+    alert("검색");
   };
 
   // radio List 만들기
@@ -95,38 +107,38 @@ const SearchContext = ({ children }) => {
   const checkBoxItems = [
     {
       type: "checkbox",
-      name: "check1",
-      id: "check1",
+      name: "donggu",
+      id: "donggu",
       label: "동구",
     },
     {
       type: "checkbox",
-      name: "qna_id",
-      id: "check2",
+      name: "seogu",
+      id: "seogu",
       label: "서구",
     },
     {
       type: "checkbox",
-      name: "",
-      id: "check3",
+      name: "namgu",
+      id: "namgu",
       label: "남구",
     },
     {
       type: "checkbox",
-      name: "check4",
-      id: "check4",
+      name: "bukgu",
+      id: "bukgu",
       label: "북구",
     },
     {
       type: "checkbox",
-      name: "check5",
-      id: "check5",
+      name: "gwangsan",
+      id: "gwangsan",
       label: "광산구",
     },
     {
       type: "checkbox",
-      name: "check6",
-      id: "check6",
+      name: "all",
+      id: "all",
       label: "전체",
     },
   ];
@@ -148,8 +160,6 @@ const SearchContext = ({ children }) => {
     );
   });
 
-  const [checkedInput, setCheckedInput] = useState([]);
-
   const getDList = async () => {
     const res = await fetch("http://localhost:8080/search/");
     const result = await res.json();
@@ -163,7 +173,7 @@ const SearchContext = ({ children }) => {
     setDetailList(resultArray);
   };
 
-  const props = { detailList, getDList, onChangeHandler, dtList, checkBoxList, radioList };
+  const props = { detailList, getDList, onChangeHandler, dtList, onSearchClick, checkBoxList, radioList };
   return <AppContext.Provider value={props}>{children}</AppContext.Provider>;
 };
 

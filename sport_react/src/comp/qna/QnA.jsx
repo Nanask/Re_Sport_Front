@@ -16,13 +16,11 @@ const QnA = () => {
 
   const trList = qnaList.map((sample, index) => {
     return (
-      <tr className="border-2 " data-id={sample.qna_seq} key={sample.qna_seq} onClick={findByIdButton}>
-        <td className=" w-1/12">{index + 1}</td>
-        <td className="block m-auto w-4/6 overflow-hidden text-ellipsis whitespace-nowrap">{sample.qna_title}</td>
+      <tr className="border-b-2 border-slate-200 h-12 font-kr" data-id={sample.qna_seq} key={sample.qna_seq} onClick={findByIdButton}>
+        <td className=" w-1/12 ">{index + 1}</td>
+        <td className=" w-2/5 overflow-hidden text-ellipsis whitespace-nowrap">{sample.qna_title}</td>
         <td className=" w-1/6">{sample.qna_name}</td>
-        <td className=" w-1/12">{sample.qna_id}</td>
-        {/* <td className="block m-auto w-2/6 overflow-hidden text-ellipsis whitespace-nowrap">{sample.qna_text}</td> */}
-        <td className="w-1/6">{sample.qna_email}</td>
+        <td className="w-1/6">{sample.qna_id}</td>
         <td className="w-1/12">{sample.qna_date}</td>
         <td className="w-1/12">{sample.qna_count}</td>
       </tr>
@@ -32,27 +30,26 @@ const QnA = () => {
   return (
     // <Routes>
     <div className="flex flex-col justify-center items-center space-y-5 font-kr">
-      <h1 className="mt-10 font-bold text-3xl">1 대 1 문의 게시판</h1>
-      <table className="text-center border-2 w-4/5">
+      <h1 className="mt-20 font-bold text-3xl mb-20">1 대 1 문의 게시판</h1>
+      <table className="text-center border-none font-kr  w-3/5">
         <thead>
-          <tr className="bg-slate-100 border-2 ">
+          <tr className="  h-10 border-b-2  border-gray-300   ">
             <th>번호</th>
             <th>제목</th>
             <th>시설이름</th>
             <th>ID</th>
-            <th>E-mail</th>
             <th>날짜</th>
             <th>조회수</th>
           </tr>
         </thead>
-        <tbody className="h-8">{trList}</tbody>
+        <tbody>{trList}</tbody>
       </table>
-      {/* <div className="">
-        <button className="mt-10 ml-auto inline-block mr-30 pt-2 pr-3 pl-3 pb-2 hover:bg-slate-200 m-3" onClick={writeOnClick}>
+      <div className="">
+        <button className="inline-flex items-center px-6 py-3 text-gray-500 bg-gray-100 rounded-md hover:bg-gray-200 hover:text-gray-600" onClick={writeOnClick}>
           작성하기
         </button>
-      </div> */}
-      <Button type="button" onClick={writeOnClick} button={"작성하기"} />
+      </div>
+      {/* <Button type="button" onClick={writeOnClick} button="작성하기" /> */}
     </div>
   );
 };
