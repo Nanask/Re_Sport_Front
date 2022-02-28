@@ -69,6 +69,7 @@ const SearchContext = ({ children }) => {
 
   const onSearchClick = async (e) => {
     const { checked, value, id } = search;
+    
     console.log("search", checkBoxItems);
     const res = await fetch("http://localhost:8080/search/");
 

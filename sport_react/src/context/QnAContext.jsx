@@ -209,6 +209,7 @@ const QnAContext = ({ children }) => {
   const writeButton = async () => {
     if (qna.qna_title === "") {
       alert("제목을 입력해주세요");
+      qna.qna_title.focus();
       return;
     } else if (qna.qna_id === "") {
       alert("ID를 입력해주세요");
