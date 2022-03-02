@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { createContext, useContext } from "react";
+import { PostFetchOption } from "../modules/FetchOption";
 import UseInput from "./../comp/custom/UseInput";
 
 const AppContext = createContext();
@@ -46,14 +47,19 @@ const SearchContext = ({ children }) => {
     },
   ]);
 
-  const [checkedItems, setCheckedItems] = useState(false);
+  const [checkedItems, setCheckedItems] = useState([]);
 
-  const onChangeHandler = (e) => {
-    const { checked, value, id } = e.target;
+  const onChangeHandler = (checked, id) => {
+    // const { checked, value, id } = e.target;
     if (checked) {
-      console.log("checked", value, id);
-      setCheckedItems([...checkBoxItems, id, value]);
-      console.log("checkedItems", checkBoxItems);
+      console.log("checked", id);
+      setCheckedItems([...checkedItems, id]);
+      console.log("checkedItems", checkedItems);
+      // alert("checkedItems" + checkedItems);
+      // 체크해제
+    } else {
+      setCheckedItems(checkedItems.filter((check) => check !== id));
+      console.log("checkedItems 체크해제", checkedItems);
     }
     // console.log("value", value);
     // console.log("checkId", checked);
@@ -68,10 +74,11 @@ const SearchContext = ({ children }) => {
   };
 
   const onSearchClick = async (e) => {
-    const { checked, value, id } = search;
-    
-    console.log("search", checkBoxItems);
-    const res = await fetch("http://localhost:8080/search/");
+    // const { checked, value, id } = search;
+
+    console.log("search", checkedItems);
+    PostFetchOption.body = JSON.stringify(checkedItems);
+    const res = await fetch("http://localhost:8080/search/", PostFetchOption);
 
     const result = await res.text();
     console.log("result", result);
@@ -85,23 +92,38 @@ const SearchContext = ({ children }) => {
       name: "radio",
       value: "pay",
       label: "유료",
+      id: "pay",
     },
     {
       type: "radio",
       name: "radio",
       value: "free",
       label: "무료",
+      id: "free",
     },
     {
       type: "radio",
       name: "radio",
       value: "payFree",
       label: "유/무료",
+      id: "payFree",
     },
   ];
 
-  const radioList = radioItems.map((item) => {
-    return <UseInput type={item.type} name={item.name} value={item.value} label={item.label} propChange={onChangeHandler}></UseInput>;
+  const radioList = radioItems.map((item, index) => {
+    return (
+      <UseInput
+        key={item.id}
+        type={item.type}
+        name={item.name}
+        id={item.id}
+        value={item.value}
+        label={item.label}
+        propChange={(e) => onChangeHandler(e.target.checked, e.target.id)}
+        checked={checkedItems.includes(`${item.id}`) ? true : false}
+        // propChange={onChangeHandler}
+      ></UseInput>
+    );
   });
 
   // checkBox List 만들기
@@ -145,7 +167,16 @@ const SearchContext = ({ children }) => {
   ];
 
   const checkBoxList = checkBoxItems.map((item) => {
-    return <UseInput type={item.type} name={item.name} id={item.id} label={item.label} propChange={onChangeHandler}></UseInput>;
+    return (
+      <UseInput
+        type={item.type}
+        name={item.name}
+        id={item.id}
+        label={item.label}
+        propChange={(e) => onChangeHandler(e.target.checked, e.target.id)}
+        checked={checkedItems.includes(`${item.id}`) ? true : false}
+      ></UseInput>
+    );
   });
 
   const dtList = detailList.map((list, index) => {

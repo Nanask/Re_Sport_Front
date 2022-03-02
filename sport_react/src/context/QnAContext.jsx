@@ -207,23 +207,23 @@ const QnAContext = ({ children }) => {
 
   // insert
   const writeButton = async () => {
-    if (qna.qna_title === "") {
-      alert("제목을 입력해주세요");
-      qna.qna_title.focus();
-      return;
-    } else if (qna.qna_id === "") {
-      alert("ID를 입력해주세요");
-      return;
-    } else if (qna.qna_email === "") {
-      alert("email를 입력해주세요");
-      return;
-    } else if (qna.qna_name === "") {
-      alert("시설이름을 입력해주세요");
-      return;
-    } else if (qna.qna_text === "") {
-      alert("내용을 입력해주세요");
-      return;
-    }
+    // if (qna.qna_title === "") {
+    //   alert("제목을 입력해주세요");
+    //   qna.qna_title.focus();
+    //   return;
+    // } else if (qna.qna_id === "") {
+    //   alert("ID를 입력해주세요");
+    //   return;
+    // } else if (qna.qna_email === "") {
+    //   alert("email를 입력해주세요");
+    //   return;
+    // } else if (qna.qna_name === "") {
+    //   alert("시설이름을 입력해주세요");
+    //   return;
+    // } else if (qna.qna_text === "") {
+    //   alert("내용을 입력해주세요");
+    //   return;
+    // }
 
     PostFetchOption.body = JSON.stringify(qna);
     const res = await fetch("http://localhost:8080/qna/", PostFetchOption);
