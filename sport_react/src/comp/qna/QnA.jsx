@@ -16,13 +16,13 @@ const QnA = () => {
 
   const trList = qnaList.map((sample, index) => {
     return (
-      <tr className="border-b-2 border-slate-200 h-12 font-kr" data-id={sample.qna_seq} key={sample.qna_seq} onClick={findByIdButton}>
+      <tr className="border-b-2 border-slate-200 h-12 font-kr" data-id={sample.id} key={sample.qna_seq} onClick={findByIdButton}>
         <td className=" w-1/12 ">{index + 1}</td>
-        <td className=" w-2/5 overflow-hidden text-ellipsis whitespace-nowrap">{sample.qna_title}</td>
-        <td className=" w-1/6">{sample.qna_name}</td>
-        <td className="w-1/6">{sample.qna_id}</td>
-        <td className="w-1/12">{sample.qna_date}</td>
-        <td className="w-1/12">{sample.qna_count}</td>
+        <td className=" w-2/5 overflow-hidden text-ellipsis whitespace-nowrap">{sample.title}</td>
+        <td className=" w-1/6">{sample.centername}</td>
+        <td className="w-1/6">{sample.email}</td>
+        <td className="w-1/12">{sample.date}</td>
+        <td className="w-1/12">{sample.count}</td>
       </tr>
     );
   });
@@ -37,7 +37,7 @@ const QnA = () => {
             <th>번호</th>
             <th>제목</th>
             <th>시설이름</th>
-            <th>ID</th>
+            <th>Email</th>
             <th>날짜</th>
             <th>조회수</th>
           </tr>
@@ -49,7 +49,7 @@ const QnA = () => {
           작성하기
         </button>
       </div>
-      {/* <Button type="button" onClick={writeOnClick} button="작성하기" /> */}
+      <Button type="button" propClick={writeOnClick} button="작성하기" />
     </div>
   );
 };

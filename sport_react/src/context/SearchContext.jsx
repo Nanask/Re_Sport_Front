@@ -48,6 +48,13 @@ const SearchContext = ({ children }) => {
   ]);
 
   const [checkedItems, setCheckedItems] = useState([]);
+  const [radioCheck, setRadioCheck] = useState({});
+
+  const onRadioHandler = (e) => {
+    const check = e.target.value;
+    console.log("check", check);
+    setRadioCheck(check);
+  };
 
   const onChangeHandler = (checked, id) => {
     // const { checked, value, id } = e.target;
@@ -76,9 +83,10 @@ const SearchContext = ({ children }) => {
   const onSearchClick = async (e) => {
     // const { checked, value, id } = search;
 
-    console.log("search", checkedItems);
-    PostFetchOption.body = JSON.stringify(checkedItems);
-    const res = await fetch("http://localhost:8080/search/", PostFetchOption);
+    console.log("checkedItem", checkedItems);
+    console.log("radioCheck", radioCheck);
+    PostFetchOption.body = JSON.stringify({ checkedItems, radioCheck });
+    const res = await fetch(`http://localhost:8080/search/${radioCheck}`, PostFetchOption);
 
     const result = await res.text();
     console.log("result", result);
@@ -90,38 +98,38 @@ const SearchContext = ({ children }) => {
     {
       type: "radio",
       name: "radio",
-      value: "pay",
+      value: "유료",
       label: "유료",
       id: "pay",
     },
     {
       type: "radio",
       name: "radio",
-      value: "free",
+      value: "무료",
       label: "무료",
       id: "free",
     },
     {
       type: "radio",
       name: "radio",
-      value: "payFree",
+      value: "유무료",
       label: "유/무료",
       id: "payFree",
     },
   ];
 
-  const radioList = radioItems.map((item, index) => {
+  const radioList = radioItems.map((item) => {
     return (
       <UseInput
         key={item.id}
         type={item.type}
         name={item.name}
-        id={item.id}
+        // id={item.id}
         value={item.value}
         label={item.label}
-        propChange={(e) => onChangeHandler(e.target.checked, e.target.id)}
-        checked={checkedItems.includes(`${item.id}`) ? true : false}
-        // propChange={onChangeHandler}
+        propChange={onRadioHandler}
+        checked={radioCheck === `${item.value}`}
+      // propChange={onChangeHandler}
       ></UseInput>
     );
   });
@@ -131,31 +139,31 @@ const SearchContext = ({ children }) => {
     {
       type: "checkbox",
       name: "donggu",
-      id: "donggu",
+      id: "동구",
       label: "동구",
     },
     {
       type: "checkbox",
       name: "seogu",
-      id: "seogu",
+      id: "서구",
       label: "서구",
     },
     {
       type: "checkbox",
       name: "namgu",
-      id: "namgu",
+      id: "남구",
       label: "남구",
     },
     {
       type: "checkbox",
       name: "bukgu",
-      id: "bukgu",
+      id: "북구",
       label: "북구",
     },
     {
       type: "checkbox",
       name: "gwangsan",
-      id: "gwangsan",
+      id: "광산구",
       label: "광산구",
     },
     {

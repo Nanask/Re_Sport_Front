@@ -6,6 +6,7 @@ import { useErrorContext } from "./ErrorContext";
 import { PutFetchOption } from "./../modules/FetchOption";
 import Button from "./../comp/custom/Button";
 
+
 const AppContext = createContext();
 
 export const useQnAContext = () => {
@@ -15,8 +16,31 @@ export const useQnAContext = () => {
 const QnAContext = ({ children }) => {
   const { errorHandler } = useErrorContext();
   const navigate = useNavigate();
-  const inputId = useRef();
 
+  // const newDate = moment.formet('YYYY-MM-DD HH:mm:ss')
+  // console.log("newDate", newDate)
+
+  let today = new Date();
+  // let time = {
+  //   year: today.getFullYear(),  //현재 년도
+  //   month: today.getMonth() + 1, // 현재 월
+  //   date: today.getDate(), // 현제 날짜
+  //   hours: today.getHours(), //현재 시간
+  //   minutes: today.getMinutes(), //현재 분
+  // };
+
+  let year = today.getFullYear(); //현재 년도
+  let month = today.getMonth() + 1; // 현재 월
+  let date = today.getDate(); // 현제 날짜
+  let hours = today.getHours(); //현재 시간
+  let minutes = today.getMinutes(); //현재 분
+  // let daystring = `${time.year}-${time.month}-${time.date} `;
+  const daystring = year + "-" + month + "-" + date + " " + hours + ":" + minutes;
+  // let timestring = ` ${time.hours}:${time.minutes}`
+
+  // console.log("today", today.now())
+
+  // console.log("timestring", timestring)
   const onChange = (e) => {
     const { value, name } = e.target;
     // console.log("name", value);
@@ -24,60 +48,43 @@ const QnAContext = ({ children }) => {
     setQnA({ ...qna, [name]: value });
   };
   const [qna, setQnA] = useState({
-    qna_seq: "",
-    qna_id: "",
-    qna_title: "",
-    qna_name: "",
-    qna_text: "",
-    qna_email: "",
-    qna_date: "",
-    qna_count: "",
+    id: "",
+    email: "",
+    title: "",
+    centername: "",
+    content: "",
+    date: "",
+    count: "",
   });
 
-  // console.log("time", time);
 
   const [qnaList, setQnAList] = useState([
-    // {
-    //   qna_seq: "",
-    //   qna_id: "",
-    //   qna_title: "",
-    //   qna_name: "",
-    //   qna_text: "",
-    //   qna_email: "",
-    //   qna_date: "",
-    //   qna_count: "",
-    // },
+
   ]);
 
   const qnaItems = [
     {
       type: "text",
-      name: "qna_title",
-      id: "qna_title",
+      name: "title",
+      id: "title",
       label: "제목",
     },
     {
       type: "text",
-      name: "qna_id",
-      id: "qna_id",
+      name: "email",
+      id: "email",
       label: "ID",
     },
     {
       type: "text",
-      name: "qna_email",
-      id: "qna_email",
-      label: "E-Mail",
-    },
-    {
-      type: "text",
-      name: "qna_center",
-      id: "qna_center",
+      name: "centername",
+      id: "centername",
       label: "시설 이름",
     },
     {
       type: "text",
-      name: "qna_text",
-      id: "qna_text",
+      name: "content",
+      id: "content",
       label: "문의 내용",
     },
   ];
@@ -129,9 +136,9 @@ const QnAContext = ({ children }) => {
   // Table을 클릭한 seq값을 찾아 vo 보여주기
   const findByIdButton = async (e) => {
     writeOnClick();
-    const qna_seq = e.target.closest("TR").dataset.id;
-    console.log("seq", qna_seq);
-    const res = await fetch(`http://localhost:8080/qna/${qna_seq}`);
+    const id = e.target.closest("TR").dataset.id;
+    console.log("seq", id);
+    const res = await fetch(`http://localhost:3000/qna/${id}`);
     const result = await res.json();
 
     // await errorCheck(res);
@@ -145,44 +152,54 @@ const QnAContext = ({ children }) => {
   };
 
   // update
-  const updateButton = async () => {
-    const { qna_seq, qna_title, qna_id, qna_name, qna_email, qna_text } = qna;
-    PutFetchOption.body = JSON.stringify(qna);
-    const res = await fetch(`http://localhost:8080/qna/${qna_seq}`, PutFetchOption);
-    const result = await res.json();
-    console.log("result", result);
-
-    errorCheck(res);
-
-    if (res?.ok) {
+  const updateButton = async (id) => {
+    if (window.confirm("수정할까요?")) {
+      // const { id,
+      //   email,
+      //   title,
+      //   centername,
+      //   content,
+      //   date,
+      //   count, } = qna;
+      PutFetchOption.body = JSON.stringify(qna);
+      const res = await fetch(`http://localhost:3000/qna/${id}`, PutFetchOption);
+      const result = await res.json();
       console.log("result", result);
-      setQnA(result);
-      navigate("/qna/", true);
-    } else {
-      return [];
+
+      errorCheck(res);
+
+      if (res?.ok) {
+        console.log("result", result);
+        setQnA(result);
+        navigate("/qna/", true);
+      } else {
+        return [];
+      }
     }
   };
 
   // delete
   const deleteButton = async () => {
-    const { qna_seq } = qna;
-    DeleteFetchOption.body = JSON.stringify(qna);
-    const res = await fetch(`http://localhost:8080/qna/${qna_seq}`, DeleteFetchOption);
-    const result = await res.text();
+    if (window.confirm("삭제할까요?")) {
+      const { id } = qna;
+      DeleteFetchOption.body = JSON.stringify(qna);
+      const res = await fetch(`http://localhost:3000/qna/${id}`, DeleteFetchOption);
+      const result = await res.json();
 
-    errorCheck(res);
+      errorCheck(res);
 
-    if (res?.ok) {
-      console.log("result", result);
-      navigate("/qna/", true);
-    } else {
-      return [];
+      if (res?.ok) {
+        console.log("result", result);
+        navigate("/qna/", true);
+      } else {
+        return [];
+      }
     }
   };
 
   // qna 데이터 전체 보여주기
   const getqnaList = async () => {
-    const res = await fetch("http://localhost:8080/qna/");
+    const res = await fetch("http://localhost:3000/qna/");
     const result = await res.json();
 
     errorCheck(res);
@@ -206,7 +223,12 @@ const QnAContext = ({ children }) => {
   };
 
   // insert
-  const writeButton = async () => {
+  const writeButton = async (
+    // qna_email,
+    // qna_title,
+    // qna_centername,
+    // qna_content,
+  ) => {
     // if (qna.qna_title === "") {
     //   alert("제목을 입력해주세요");
     //   qna.qna_title.focus();
@@ -225,16 +247,28 @@ const QnAContext = ({ children }) => {
     //   return;
     // }
 
-    PostFetchOption.body = JSON.stringify(qna);
-    const res = await fetch("http://localhost:8080/qna/", PostFetchOption);
-    const result = await res.text();
+    // const qna = {
 
-    await errorCheck(res);
+    //   email: qna_email,
+    //   title: qna_title,
+    //   centername: qna_centername,
+    //   content: qna_content,
+    //   date: JSON.stringify(daystring)
+    // };
+
+    console.log("qna 날짜", qna.date)
+
+    PostFetchOption.body = JSON.stringify(qna);
+    const res = await fetch("http://localhost:3000/qna/", PostFetchOption);
+    const result = await res.json();
+    // console.log("result", result)
+
+    errorCheck(res);
 
     // 백엔드 오류 검증
-    if (result === "OK") {
+    if (res?.ok) {
       console.log("result", result);
-      setQnA({ qna_seq: "", qna_id: "", qna_title: "", qna_name: "", qna_text: "", qna_email: "", qna_date: "", qna_count: "" });
+      setQnA({ result, qna_date: daystring });
       alert("등록 완료 !!");
       navigate("/qna/", true);
     }

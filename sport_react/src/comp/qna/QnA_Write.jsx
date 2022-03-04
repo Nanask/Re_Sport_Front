@@ -13,23 +13,19 @@ const QnA_Write = () => {
         <div>
           <div className="flex space-x-2 pb-3 justify-center ">
             <label className="flex-1 text-center">제목</label>
-            <input onChange={onChange} name="qna_title" className="flex-1 bg-slate-200 " value={qna.qna_title} />
-          </div>
-          <div className="flex items-center space-x-2 pb-3">
-            <label className="flex-1 text-center">ID</label>
-            <input onChange={onChange} name="qna_id" className="flex-1 bg-slate-200" value={qna.qna_id} />
+            <input onChange={onChange} name="title" className="flex-1 bg-slate-200 " value={qna.title} />
           </div>
           <div className="flex items-center space-x-2 pb-3">
             <label className="flex-1 text-center">E-mail</label>
-            <input onChange={onChange} name="qna_email" className="flex-1 bg-slate-200" value={qna.qna_email} />
+            <input onChange={onChange} name="email" className="flex-1 bg-slate-200" value={qna.email} />
           </div>
           <div className="flex items-center space-x-2 pb-3">
             <label className="flex-1 text-center">시설 이름</label>
-            <input onChange={onChange} name="qna_name" className="flex-1 bg-slate-200" value={qna.qna_name} />
+            <input onChange={onChange} name="centername" className="flex-1 bg-slate-200" value={qna.centername} />
           </div>
           <div className="flex items-center space-x-2 pb-3">
             <label className="flex-1 text-center">문의 내용</label>
-            <input onChange={onChange} name="qna_text" className="flex-1 bg-slate-200" value={qna.qna_text} />
+            <input onChange={onChange} name="content" className="flex-1 bg-slate-200" value={qna.content} />
           </div>
         </div>
       </div>
